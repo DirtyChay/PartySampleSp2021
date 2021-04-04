@@ -1,8 +1,11 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
 	public bool inControl = true;
+	public bool canWarp = true;
 	public float speed = 5f;
 	
 	public KeyCode upKey = KeyCode.W;
@@ -11,7 +14,12 @@ public class PlayerController : MonoBehaviour {
 	public KeyCode rightKey = KeyCode.D;
 	public KeyCode attackKey = KeyCode.J;
 	public KeyCode itemKey = KeyCode.K;
-
+	public KeyCode warpCentricKey = KeyCode.X;
+	public KeyCode warpExteriorKey = KeyCode.Z;
+	public KeyCode mapViewKey = KeyCode.M;
+	public KeyCode replayKey = KeyCode.R;
+	public KeyCode quitKey = KeyCode.Q;
+	
 	public Rigidbody2D rigidbody2D;
 	public BaseWeaponController currentWeapon;
 	public BaseItemController currentItem;
@@ -20,6 +28,16 @@ public class PlayerController : MonoBehaviour {
 	public Vector2 velocity;
 
 	public void Update() {
+
+		if (Input.GetKey(replayKey)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		if (Input.GetKey(quitKey)) {
+#if UNITY_EDITOR
+			EditorApplication.ExitPlaymode();
+#else
+			Application.Quit();
+#endif
+		}
+		
 		velocity = Vector2.zero;
 		
 		if (inControl) {
@@ -53,12 +71,33 @@ public class PlayerController : MonoBehaviour {
 					if (currentItem != null) currentItem.OnPress();
 				}
 			}
+
+			if (WarpManager.Instance != null) // code specific to the warp part of game
+			{
+				if (canWarp) {
+					if (Input.GetKeyDown(warpCentricKey) && !Input.GetKey(mapViewKey)) {
+						WarpManager.Instance.WarpCentricAll();
+					}
+					if (Input.GetKeyDown(warpExteriorKey) && !Input.GetKey(mapViewKey)) {
+						WarpManager.Instance.WarpExteriorAll();
+					}
+				}
+				if (Input.GetKey(mapViewKey))
+				{
+					WarpManager.Instance.MapView();
+				}
+				else
+				{
+					WarpManager.Instance.GameView();
+				}
+			}
 		}
 
 		rigidbody2D.velocity = velocity;
 	}
 
 	public void Turn(Direction direction) {
+		return;
 		if (direction == facing) return;
 		facing = direction;
 		Vector3 eulerAngle = Vector3.one;
