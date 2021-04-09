@@ -5,33 +5,50 @@ using UnityEngine;
 public class RangedAttack : MonoBehaviour
 {
     public bool isAttacking;
+    public int damage;
+    public int cost; // how many paints it'll cost. Not checked for in this class.
+    public int attackRadius; // inclusive. How much space the ranged attack covers.
     public int attackDelay;
-    public int attackRadius; // inclusive radius
-    public int cooldownLength;
-    public int cd = 0;
+    public int attackRange; // inclusive. How far away the player is allowed to attack.
+    public float cooldownLength;
+    public float cd = 0;
     public KeyCode attackButton = KeyCode.Mouse0;
+    public GameObject player;
 
     void Update()
     {
         /* when the player presses the ranged attack button */
         if (Input.GetKeyDown(attackButton))
         {
-            if (cd.Equals(0))
+            Vector2 markerCoordinates = getMouseCoordinates();
+            if (!targetIsInRange(markerCoordinates))
             {
-                Vector2 markerCoordinates = getMouseCoordinates();
-                if (targetIsInRange(markerCoordinates))
-                {
-                }
-                else
-                {
-                    Debug.Log("Target is out of range.");
-                }
+                Debug.Log("Target is out of range.");
             }
-            else
+            else if (cd > 0)
             {
                 Debug.Log("Ranged attack is on cooldown.");
             }
+            else
+            {
+                Debug.Log("Attack start.");
+
+
+                cd = cooldownLength;
+            }
         }
+        if (cd > 0)
+        {
+            cd -= Time.deltaTime;
+        }
+    }
+
+    /**
+     * After the delay, spawn a small regional attack on the location.
+     */
+    IEnumerator delayedAttackRoutine()
+    {
+        yield return new WaitForSeconds(attackDelay);
     }
 
     /**
@@ -45,7 +62,7 @@ public class RangedAttack : MonoBehaviour
         GameObject parent = transform.parent.gameObject;
         Vector2 parentCoords = parent.transform.position;
         float distance = Vector2.Distance(parentCoords, targetCoords);
-        return (distance <= attackRadius);
+        return (distance <= attackRange);
     }
 
     /**
