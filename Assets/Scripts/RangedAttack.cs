@@ -6,7 +6,7 @@ public class RangedAttack : MonoBehaviour
 {
     public bool isAttacking;
     public int attackDelay;
-    public int attackRadius;
+    public int attackRadius; // inclusive radius
     public int cooldownLength;
     public int cd = 0;
     public KeyCode attackButton = KeyCode.Mouse0;
@@ -18,7 +18,7 @@ public class RangedAttack : MonoBehaviour
         {
             if (cd.Equals(0))
             {
-                Vector3 markerCoordinates = getMouseCoordinates();
+                Vector2 markerCoordinates = getMouseCoordinates();
                 if (targetIsInRange(markerCoordinates))
                 {
                 }
@@ -29,7 +29,7 @@ public class RangedAttack : MonoBehaviour
             }
             else
             {
-                Debug.Log("Ranged attack is on cooldown!");
+                Debug.Log("Ranged attack is on cooldown.");
             }
         }
     }
@@ -40,24 +40,24 @@ public class RangedAttack : MonoBehaviour
      * @source https://www.codegrepper.com/code-examples/csharp/
      * unity+how+to+check+if+a+game+object+if+with+in+a+radius
      */
-    private bool targetIsInRange(Vector3 targetCoords)
+    private bool targetIsInRange(Vector2 targetCoords)
     {
-        GameObject parentUnit = transform.parent.gameObject;
-        Vector3 parentCoords = parentUnit.transform.position;
-        float distance = Vector3.Distance(parentCoords, targetCoords);
-        return distance <= attackRadius;
+        GameObject parent = transform.parent.gameObject;
+        Vector2 parentCoords = parent.transform.position;
+        float distance = Vector2.Distance(parentCoords, targetCoords);
+        return (distance <= attackRadius);
     }
 
     /**
      * Returns the position in the world where the player's mouse is hovering over.
      * 
-     * @source https://gamedevbeginner.com/
-     * how-to-convert-the-mouse-position-to-world-space-in-unity-2d-3d/#screen_to_world_2d
+     * @source https://stackoverflow.com/questions/46998241/getting-mouse-position-in-unity
      */
-    private Vector3 getMouseCoordinates()
+    private Vector2 getMouseCoordinates()
     {
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = Camera.main.nearClipPlane;
-        return Camera.main.ScreenToWorldPoint(mousePos);
+        Vector3 mousePos = Input.mousePosition; // mouse position in pixels
+        Vector2 screenPos = new Vector2(mousePos.x, mousePos.y);
+        Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+        return worldPos;
     }
 }
