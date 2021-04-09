@@ -13,14 +13,16 @@ public class RangedAttack : MonoBehaviour
     public float cooldownLength;
     public float cd = 0;
     public KeyCode attackButton = KeyCode.Mouse0;
-    public GameObject player;
+    public GameObject player; // whoever is going to use this attack
+    private Vector2 markerCoordinates; // holds the coordinates to strike
 
     void Update()
     {
         /* when the player presses the ranged attack button */
         if (Input.GetKeyDown(attackButton))
         {
-            Vector2 markerCoordinates = getMouseCoordinates();
+            isAttacking = false;
+            markerCoordinates = getMouseCoordinates();
             if (!targetIsInRange(markerCoordinates))
             {
                 Debug.Log("Target is out of range.");
@@ -32,10 +34,14 @@ public class RangedAttack : MonoBehaviour
             else
             {
                 Debug.Log("Attack start.");
-
-
+                isAttacking = true;
                 cd = cooldownLength;
             }
+        }
+        if (isAttacking)
+        {
+            StartCoroutine(delayedAttackRoutine());
+            isAttacking = false;
         }
         if (cd > 0)
         {
@@ -49,6 +55,7 @@ public class RangedAttack : MonoBehaviour
     IEnumerator delayedAttackRoutine()
     {
         yield return new WaitForSeconds(attackDelay);
+        // spawn attack on the location
     }
 
     /**
@@ -59,9 +66,8 @@ public class RangedAttack : MonoBehaviour
      */
     private bool targetIsInRange(Vector2 targetCoords)
     {
-        GameObject parent = transform.parent.gameObject;
-        Vector2 parentCoords = parent.transform.position;
-        float distance = Vector2.Distance(parentCoords, targetCoords);
+        Vector2 playerCoords = player.transform.position;
+        float distance = Vector2.Distance(playerCoords, targetCoords);
         return (distance <= attackRange);
     }
 
