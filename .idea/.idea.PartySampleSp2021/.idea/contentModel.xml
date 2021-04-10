@@ -6,7 +6,6 @@
     <e p="D:\OneDrive\repos\Games\PartySampleSp2021" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="RangedAttacker.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="AudioManager.cs" t="Include" />
           <e p="BaseItemController.cs" t="Include" />
@@ -19,7 +18,6 @@
           <e p="HitboxController.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />
           <e p="PlayerInventory.cs" t="Include" />
-          <e p="RangedAttack.cs" t="Include" />
           <e p="StupidAIMovement.cs" t="Include" />
           <e p="WarpComponent.cs" t="Include" />
           <e p="WarpManager.cs" t="Include" />
@@ -36,6 +34,10 @@
         </e>
         <e p="Shaders" t="Include">
           <e p="CameraEffectShader.shader" t="Include" />
+        </e>
+        <e p="Submissions" t="Include">
+          <e p="RangedAttack.cs" t="Include" />
+          <e p="RangedAttacker.cs" t="Include" />
         </e>
       </e>
       <e p="obj" t="ExcludeRecursive" />

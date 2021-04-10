@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.GameCenter;
 
 public class RangedAttack : MonoBehaviour
 {
@@ -33,11 +34,11 @@ public class RangedAttack : MonoBehaviour
             markerCoordinates = getMouseCoordinates();
             if (!targetIsInRange(markerCoordinates))
             {
-                Debug.Log("Target is out of range.");
+                Debug.Log("Target out of range.");
             }
             else if (cd > 0)
             {
-                Debug.Log("Ranged attack is on cooldown.");
+                Debug.Log("Ranged attack on cooldown.");
             }
             else
             {
@@ -61,12 +62,27 @@ public class RangedAttack : MonoBehaviour
     }
 
     /**
-     * After the delay, spawn a small regional attack on the location.
+     * After the delay, spawn a regional attack on the location.
+     * Currently, it would also damage the player.
+     *
+     * @source https://docs.unity3d.com/ScriptReference/Physics.OverlapSphere.html
+     * @source https://answers.unity.com/questions/454590/c-how-to-check-if-a-gameobject-contains-a-certain.html
      */
     IEnumerator delayedAttackRoutine()
     {
+        Debug.Log("Beginning countdown.");
         yield return new WaitForSeconds(attackDelay);
-        // spawn attack on the location
+        Debug.Log("Commence AOE");
+        Collider[] hitColliders = Physics.OverlapSphere(markerCoordinates, attackRadius);
+        foreach (var hitCollider in hitColliders)
+        {
+            Debug.Log("This guy is doomed: " + hitCollider.name + " takes " + damage + " damage.");
+            Health hp = hitCollider.GetComponent<Health>();
+            if (hp != null)
+            {
+                hp.Hit(damage);
+            }
+        }
     }
 
     /**

@@ -10,6 +10,7 @@ public class RangedAttacker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Ranged Attacker Created.");
         _age = 0;
     }
 
@@ -18,6 +19,7 @@ public class RangedAttacker : MonoBehaviour
     {
         if (_age > lifespan)
         {
+            Debug.Log("Ranged Attacker Destroyed.");
             Destroy(this.gameObject);
         }
         _age += Time.deltaTime;
