@@ -1,20 +1,28 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RangedAttack : MonoBehaviour
 {
+    public GameObject rangedAttackerPrefab; // unit that spawns and attacks
     public bool isAttacking;
     public int damage;
-    public int cost; // how many paints it'll cost. Not checked for in this class.
-    public int attackRadius; // inclusive. How much space the ranged attack covers.
+    public int paintCost; // not checked for
+    public int attackRadius; // Inclusive radius of attack.
     public int attackDelay;
-    public int attackRange; // inclusive. How far away the player is allowed to attack.
+    public int attackRange; // Inclusive max distance for a valid attack.
     public float cooldownLength;
     public float cd = 0;
     public KeyCode attackButton = KeyCode.Mouse0;
-    public GameObject player; // whoever is going to use this attack
     private Vector2 markerCoordinates; // holds the coordinates to strike
+    private Vector2 screenBounds; // so that we can spawn this attacker to a side of the screen
+
+    private void Start()
+    {
+        screenBounds =
+            Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+    }
 
     void Update()
     {
@@ -38,11 +46,14 @@ public class RangedAttack : MonoBehaviour
                 cd = cooldownLength;
             }
         }
+
         if (isAttacking)
         {
+            spawnAttacker();
             StartCoroutine(delayedAttackRoutine());
             isAttacking = false;
         }
+
         if (cd > 0)
         {
             cd -= Time.deltaTime;
@@ -59,6 +70,18 @@ public class RangedAttack : MonoBehaviour
     }
 
     /**
+     * Spawns a unit to the right of the screen.
+     * Possible? Try to modify the prefab's lifespan to whatever we have set here.
+     * 
+     * @source https://youtu.be/E7gmylDS1C4?t=434
+     */
+    private void spawnAttacker()
+    {
+        GameObject a = Instantiate(rangedAttackerPrefab) as GameObject;
+        a.transform.position = new Vector2(screenBounds.x - 1, screenBounds.y - 1);
+    }
+
+    /**
      * Checks to see if the player's target is in range.
      *
      * @source https://www.codegrepper.com/code-examples/csharp/
@@ -66,7 +89,7 @@ public class RangedAttack : MonoBehaviour
      */
     private bool targetIsInRange(Vector2 targetCoords)
     {
-        Vector2 playerCoords = player.transform.position;
+        Vector2 playerCoords = transform.position;
         float distance = Vector2.Distance(playerCoords, targetCoords);
         return (distance <= attackRange);
     }
