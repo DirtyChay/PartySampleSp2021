@@ -10,9 +10,9 @@ public class RangedAttack : MonoBehaviour
     public bool isAttacking;
     public int damage;
     public int paintCost; // not checked for
-    public int attackRadius; // Inclusive radius of attack.
+    public int attackRadius; // radius of attack.
     public int attackDelay;
-    public int attackRange; // Inclusive max distance for a valid attack.
+    public int attackRange; // max distance allowed for a valid attack.
     public float cooldownLength;
     public float cd = 0;
     public KeyCode attackButton = KeyCode.Mouse0;
@@ -27,7 +27,6 @@ public class RangedAttack : MonoBehaviour
 
     void Update()
     {
-        /* when the player presses the ranged attack button */
         if (Input.GetKeyDown(attackButton))
         {
             isAttacking = false;

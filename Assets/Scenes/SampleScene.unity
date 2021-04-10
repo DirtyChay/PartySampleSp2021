@@ -1760,7 +1760,6 @@ GameObject:
   - component: {fileID: 1174134431}
   - component: {fileID: 1174134430}
   - component: {fileID: 1174134429}
-  - component: {fileID: 1174134432}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1902,29 +1901,6 @@ MonoBehaviour:
   currentItem: {fileID: 1855980425}
   facing: 0
   velocity: {x: 0, y: 0}
---- !u!114 &1174134432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1174134426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4233d9c18234ba4f91b515761ac95ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rangedAttackerPrefab: {fileID: 4063218249767843426, guid: 2c5a03d1d1474f94a86e15c264aeb035,
-    type: 3}
-  isAttacking: 0
-  damage: 0
-  paintCost: 0
-  attackRadius: 20
-  attackDelay: 3
-  attackRange: 3
-  cooldownLength: 3
-  cd: 0
-  attackButton: 323
 --- !u!1 &1361038168
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,17 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="eb465b6c-2361-4be5-a108-c3ab29b44a5b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PartySampleSp2021/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PartySampleSp2021/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RangedAttackRadius.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RangedAttackRadius.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RangedAttacker.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RangedAttacker.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RangedAttacker.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RangedAttacker.prefab.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RangedAttack.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RangedAttack.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Submissions/RangedAttacker.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Submissions/RangedAttacker.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Submissions/RangedAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Submissions/RangedAttack.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +35,7 @@
     <changedPaths>
       <option value="$PROJECT_DIR$/Assets/RangedAttacker.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/RangedAttack.cs" />
+      <option value="$PROJECT_DIR$/Assets/Submissions/RangedAttack.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1mW7RNbbxJVT3wTLNMuFyrJQE3p" />
@@ -55,6 +47,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="Discover.Launch.Via.Unity" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TWShift.4" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -128,6 +121,7 @@
       <workItem from="1617995640824" duration="6824000" />
       <workItem from="1618008273084" duration="6459000" />
       <workItem from="1618014869632" duration="1113000" />
+      <workItem from="1618016302139" duration="198000" />
     </task>
     <servers />
   </component>
