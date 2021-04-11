@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour {
 			if (horizontal > 0) curr = Direction.RIGHT;
 			else if (horizontal < 0) curr = Direction.LEFT;
 			
-			Turn(curr);
+			//Turn(curr);
 			
 			velocity = new Vector2(horizontal, vertical).normalized * speed;
 
@@ -97,9 +97,9 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void Turn(Direction direction) {
-		return;
 		if (direction == facing) return;
 		facing = direction;
+		/*
 		Vector3 eulerAngle = Vector3.one;
 		switch (direction) {
 			case Direction.UP: eulerAngle = new Vector3(0, 0, 0); break;
@@ -109,6 +109,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		
 		transform.rotation = Quaternion.Euler(eulerAngle);
+		*/
 	}
 }
 
