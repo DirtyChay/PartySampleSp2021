@@ -137,4 +137,4 @@ MonoBehaviour:
   alignsWithTargetHorizontally: 1
   alignsWithTargetVertically: 0
   facesTarget: 1
-  rotatesInstantly: 0
+  rotatesInstantly: 1
